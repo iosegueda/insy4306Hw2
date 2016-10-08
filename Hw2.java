@@ -12,12 +12,15 @@ public class Hw2 extends JFrame //implements ActionListener
 			JMenu file;
 			JMenuItem open;
 			JMenuItem exit; 
-			/*JMenu find;
-			JMenu about; 
-			
-			
+			JMenu find;
 			JMenuItem wordCount;
-			JMenuItem fileStats;*/
+			JMenuItem fileStats;
+			JMenu findNumbers;
+			JMenu about; 
+			JMenuItem version;
+			JMenuItem phoneNumbers;
+			JMenuItem socialSecurityNumbers;
+			
 		
 	public Hw2()
 	{
@@ -55,8 +58,35 @@ public class Hw2 extends JFrame //implements ActionListener
 			
 		});
 		file.add(exit);
+		
+		find = new JMenu( "Find" );
+        find.setMnemonic( 'i' );
+		
+		wordCount = new JMenuItem("Word Count");
+		find.add(wordCount);
+		
+		fileStats = new JMenuItem("File Stats");
+		find.add(fileStats);
+		
+		findNumbers = new JMenu("Find Numbers");
+		find.add(findNumbers);
+
+		phoneNumbers = new JMenuItem("Phone Numbers");
+		findNumbers.add(phoneNumbers);
+		
+		socialSecurityNumbers = new JMenuItem("Social Security Numbers");
+		findNumbers.add(socialSecurityNumbers);
+		
+		
+		
+		about = new JMenu("About");
+		about.setMnemonic('a');
+		
+		version = new JMenuItem("Version");
 
 		menuBar.add(file);
+		menuBar.add(find);
+		menuBar.add(about);
 		setJMenuBar( menuBar );
 		desktop = new JDesktopPane();
 		container.add( desktop );
