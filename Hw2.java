@@ -7,7 +7,7 @@ import java.util.*;
 public class Hw2 extends JFrame //implements ActionListener
 {
 	private JDesktopPane desktop; 
-			Container container;
+			//Container container;
 			JMenuBar menuBar;
 			JMenu file;
 			JMenuItem open;
@@ -20,18 +20,19 @@ public class Hw2 extends JFrame //implements ActionListener
 			JMenuItem version;
 			JMenuItem phoneNumbers;
 			JMenuItem socialSecurityNumbers;
+			//JInternalFrame wordCountFrame;
 			
 		
 	public Hw2()
 	{
 		super( "GUI App" );
-		try
-        {
-            UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
-        }
-		catch ( Exception e ) {}
+		//try
+        //{
+       //     UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
+       // }
+		//catch ( Exception e ) {}
 		
-		container = getContentPane();
+		//container = getContentPane();
 		menuBar = new JMenuBar();
 		file = new JMenu( "File" );
         file.setMnemonic( 'F' );
@@ -63,6 +64,29 @@ public class Hw2 extends JFrame //implements ActionListener
         find.setMnemonic( 'i' );
 		
 		wordCount = new JMenuItem("Word Count");
+		wordCount.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent ae)
+			{
+				JInternalFrame wordCountFrame = new JInternalFrame("Word Count", true, true, true, true);
+				
+				wordCountFrame.setSize(20, 20);
+				wordCountFrame.setLocation(1, 1);
+				//wordCountPanel wcp =new wordCountPanel();
+				//wordCountFrame.add(wcp);
+				//wordCountFrame.pack();
+				//wordCountFrame.setLocationRelativeTo(null);
+				System.out.println("internal frame");
+				wordCountFrame.setVisible(true);
+				desktop.add(wordCountFrame);
+				try 
+				{
+					wordCountFrame.setSelected(true);
+				} 
+				catch (Exception e) 
+				{}
+			}
+		});
 		find.add(wordCount);
 		
 		fileStats = new JMenuItem("File Stats");
@@ -87,9 +111,11 @@ public class Hw2 extends JFrame //implements ActionListener
 		menuBar.add(file);
 		menuBar.add(find);
 		menuBar.add(about);
-		setJMenuBar( menuBar );
+		setJMenuBar(menuBar);
+		//desktop.add(wordCountFrame);
 		desktop = new JDesktopPane();
-		container.add( desktop );
+		
+		//container.add( desktop );
 		
 		
 	}
@@ -121,4 +147,6 @@ public class Hw2 extends JFrame //implements ActionListener
 		return fileName;
 						
 	}
+	
+	
 }
