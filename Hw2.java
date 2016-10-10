@@ -234,7 +234,7 @@ public class Hw2 extends JFrame
         private JButton findNowButton;
         private JLabel resultsLabel;
         private JTextField resultsField;
-        private JTextArea myArea;
+        //private JTextArea myArea;
 
         public wordCountPanel()
         {
@@ -244,21 +244,9 @@ public class Hw2 extends JFrame
             findField = new JTextField(30);
             findNowButton = new JButton ("    Find Now");
 
-            myArea = new JTextArea();
-
-            Handeler myHandeler = new Handeler();
-            findNowButton.addActionListener(myHandeler);
-
             add(findLabel);
-            add(myArea);
+			add(findField);
             add(findNowButton);
-        }
-        class Handeler implements ActionListener
-        {
-            public void actionPerformed(ActionEvent ae)
-            {
-                System.out.println(findField.getText());
-            }
         }
     }
     
