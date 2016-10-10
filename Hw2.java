@@ -6,40 +6,24 @@ import java.util.*;
 
 public class Hw2 extends JFrame //implements ActionListener
 {
-	private JDesktopPane desktop; 
-			//Container container;
-			JMenuBar menuBar;
-			JMenu file;
-			JMenuItem open;
-			JMenuItem exit; 
-			JMenu find;
-			JMenuItem wordCount;
-			JMenuItem fileStats;
-			JMenu findNumbers;
-			JMenu about; 
-			JMenuItem version;
-			JMenuItem phoneNumbers;
-			JMenuItem socialSecurityNumbers;
-			//JInternalFrame wordCountFrame;
-			
+	private JDesktopPane desktop;  
 		
 	public Hw2()
 	{
 		super( "GUI App" );
-		//try
-        //{
-       //     UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
-       // }
-		//catch ( Exception e ) {}
+		try
+        {
+            UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
+        }
+		catch ( Exception e ) {}
 		
-		//container = getContentPane();
 		desktop = new JDesktopPane();
-		menuBar = new JMenuBar();
-		file = new JMenu( "File" );
-        file.setMnemonic( 'F' );
+		JMenuBar menuBar = new JMenuBar();
+		JMenu fileMenuOption = new JMenu( "File" );
+        fileMenuOption.setMnemonic( 'F' );
         
-		JMenuItem open= new JMenuItem("Open");
-		open.addActionListener(new ActionListener()
+		JMenuItem openMenuItemOption = new JMenuItem("Open");
+		openMenuItemOption.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent ae)
 			{
@@ -47,10 +31,10 @@ public class Hw2 extends JFrame //implements ActionListener
 				
 			}
 		});
-        file.add(open);
+        fileMenuOption.add(openMenuItemOption);
 		
-		exit=new JMenuItem("Exit");
-		exit.addActionListener(new ActionListener()
+		JMenuItem exitMenuItemOption = new JMenuItem("Exit");
+		exitMenuItemOption.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent ae)
 			{
@@ -59,64 +43,71 @@ public class Hw2 extends JFrame //implements ActionListener
 			}
 			
 		});
-		file.add(exit);
+		fileMenuOption.add(exitMenuItemOption);
 		
-		find = new JMenu( "Find" );
-        find.setMnemonic( 'i' );
+		JMenu findMenuOption = new JMenu( "Find" );
+        findMenuOption.setMnemonic( 'i' );
 		
-		wordCount = new JMenuItem("Word Count");
-		wordCount.addActionListener(new ActionListener()
+		JMenuItem wordCountMenuItem = new JMenuItem("Word Count");
+		wordCountMenuItem.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent ae)
 			{
 				JInternalFrame wordCountFrame = new JInternalFrame("Word Count", true, true, true, true);
-				
-				wordCountFrame.setSize(20, 20);
-				wordCountFrame.setLocation(1, 1);
-				//wordCountPanel wcp =new wordCountPanel();
-				//wordCountFrame.add(wcp);
-				//wordCountFrame.pack();
-				//wordCountFrame.setLocationRelativeTo(null);
-				System.out.println("internal frame");
-				wordCountFrame.setVisible(true);
+
+				wordCountPanel wcp = new wordCountPanel();
+				wordCountFrame.add(wcp);
+
+				wordCountFrame.pack();
 				desktop.add(wordCountFrame);
-				try 
-				{
-					wordCountFrame.setSelected(true);
-				} 
-				catch (Exception e) 
-				{}
+				wordCountFrame.setVisible(true);
+
 			}
 		});
-		find.add(wordCount);
+		findMenuOption.add(wordCountMenuItem);
 		
-		fileStats = new JMenuItem("File Stats");
-		find.add(fileStats);
+		JMenuItem fileStatsMenuItem = new JMenuItem("File Stats");
+		findMenuOption.add(fileStatsMenuItem);
 		
-		findNumbers = new JMenu("Find Numbers");
-		find.add(findNumbers);
+		JMenu findNumbersMenuOption = new JMenu("Find Numbers");
+		findMenuOption.add(findNumbersMenuOption);
+		
+		
+		JMenuItem phoneNumbersMenuItem = new JMenuItem("Phone Numbers");
+		findNumbersMenuOption.add(phoneNumbersMenuItem);
+		phoneNumbersMenuItem.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent ae)
+			{
+				JInternalFrame findPhoneNumbersFrame = new JInternalFrame("Word Count", true, true, true, true);
 
-		phoneNumbers = new JMenuItem("Phone Numbers");
-		findNumbers.add(phoneNumbers);
-		
-		socialSecurityNumbers = new JMenuItem("Social Security Numbers");
-		findNumbers.add(socialSecurityNumbers);
-		
-		
-		
-		about = new JMenu("About");
-		about.setMnemonic('a');
-		
-		version = new JMenuItem("Version");
+				findPhoneNumbersPanel fnp = new findPhoneNumbersPanel();
+				findPhoneNumbersFrame.add(fnp);
 
-		menuBar.add(file);
-		menuBar.add(find);
-		menuBar.add(about);
+				findPhoneNumbersFrame.pack();
+				desktop.add(findPhoneNumbersFrame);
+				findPhoneNumbersFrame.setVisible(true);
+
+			}
+		});
+		
+		JMenuItem socialSecurityNumbersMenuItem = new JMenuItem("Social Security Numbers");
+		findNumbersMenuOption.add(socialSecurityNumbersMenuItem);
+		
+		
+		
+		JMenu aboutMenuOption = new JMenu("About");
+		aboutMenuOption.setMnemonic('a');
+		
+		JMenuItem versionMenuOption = new JMenuItem("Version");
+
+		menuBar.add(fileMenuOption);
+		menuBar.add(findMenuOption);
+		menuBar.add(aboutMenuOption);
 		setJMenuBar(menuBar);
-		//desktop.add(wordCountFrame);
 		
 		
-		//container.add( desktop );
+		add( desktop );
 		
 		
 	}
@@ -149,5 +140,74 @@ public class Hw2 extends JFrame //implements ActionListener
 						
 	}
 	
+	private class wordCountPanel extends JPanel
+	{
+		private JLabel findLabel;
+		private JTextField findField;
+		private JLabel findNowLabel;
+		private JButton findNowButton;
+		private JLabel resultsLabel;
+		private JTextField resultsField;
+		private JTextArea myArea;
+
+		public wordCountPanel()
+		{
+			setLayout(new FlowLayout());
+
+			findLabel = new JLabel("    Find: ");
+			findField = new JTextField(30);
+			findNowButton = new JButton ("    Find Now");
+
+			myArea = new JTextArea();
+
+			Handeler myHandeler = new Handeler();
+			findNowButton.addActionListener(myHandeler);
+
+			add(findLabel);
+			//add(nameField);
+			add(myArea);
+			//add(findNowLabel);
+			add(findNowButton);
+		}
+		class Handeler implements ActionListener
+		{
+			public void actionPerformed(ActionEvent ae)
+			{
+				System.out.println(findField.getText());
+			}
+		}
+	}
 	
+	
+	private class findPhoneNumbersPanel extends JPanel
+	{
+		private JTextField resultsField;
+		private JButton doneButton;
+		private JTextArea myArea;
+
+		public findPhoneNumbersPanel()
+		{
+			setLayout(new FlowLayout());
+			
+			resultsField = new JTextField("");
+			doneButton = new JButton("    Done");
+
+			myArea = new JTextArea();
+
+			//Handeler myHandeler = new Handeler();
+			//findNowButton.addActionListener(myHandeler);
+
+			add (resultsField);
+			//add(nameField);
+			add(myArea);
+			add(doneButton);
+		}
+		/*class Handeler implements ActionListener
+		{
+			public void actionPerformed(ActionEvent ae)
+			{
+				System.out.println(findField.getText());
+			}
+		}*/
+	}
 }
