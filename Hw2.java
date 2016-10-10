@@ -1,3 +1,4 @@
+//Iris Osegueda 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -75,11 +76,11 @@ public class Hw2 extends JFrame
         {
             public void actionPerformed(ActionEvent ae)
             {
-                fileStats(file);
+                String fileStatsInfo = fileStats(file);
 
                 JInternalFrame fileStatsFrame = new JInternalFrame("File Stats", true, true, true, true);
 
-                fileStatsPanel fsp = new fileStatsPanel();
+                fileStatsPanel fsp = new fileStatsPanel(fileStatsInfo);
                 fileStatsFrame.add(fsp);
 
                 fileStatsFrame.pack();
@@ -265,12 +266,13 @@ public class Hw2 extends JFrame
     {
         private JTextArea resultsField;
 
-        public fileStatsPanel()
+        public fileStatsPanel(String fileStatsInfo)
         {
             setLayout(new FlowLayout());
             
-            resultsField = new JTextArea(25, 30);
+            resultsField = new JTextArea(15, 20);
             resultsField.setEditable(false);
+			resultsField.setText(fileStatsInfo);
 
             add (resultsField);
 
@@ -327,9 +329,9 @@ public class Hw2 extends JFrame
                                 "\nNo. of words = " + wordCount +
                                 "\nNo. of char = " + charCount );   */
             
-            allCounts = ( "\nNo. of lines: " + lineCount +
-                            "\nNo. of words = " + wordCount +
-                            "\nNo. of char = " + charCount );
+            allCounts = ( "\nNumber of lines: " + lineCount +
+                            "\nNumber of words: " + wordCount +
+                            "\nNumber of characters:  " + charCount );
 
             System.out.println(allCounts);
         }
