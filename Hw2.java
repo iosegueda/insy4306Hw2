@@ -135,6 +135,23 @@ public class Hw2 extends JFrame
         {
             public void actionPerformed(ActionEvent ae)
             {
+
+                //String content = readFile(file.toString());
+                String content = readFile("testFile.txt");
+                String myPattern = "\\d{3}-\\d{2}-\\d{4}";
+                Pattern p = Pattern.compile(myPattern);
+                Matcher m = p.matcher(content);
+
+                int index = 0;
+                while(!m.hitEnd())
+                {
+                    if (m.find(index)) 
+                    {
+                        System.out.println(m.group());
+                        index = m.end();
+                    }
+                }
+
                 JInternalFrame socialSecurityNumbersFrame = new JInternalFrame("Social Security Numbers Found", true, true, true, true);
 
                 socialSecurityNumbersPanel ssnp = new socialSecurityNumbersPanel();
