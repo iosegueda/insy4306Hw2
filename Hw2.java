@@ -166,6 +166,15 @@ public class Hw2 extends JFrame
         demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         demo.setLocationRelativeTo(null);
         demo.setSize(1000,500); 
+        
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int w = demo.getSize().width;
+        int h = demo.getSize().height;
+        int x = (dim.width-w)/2;
+        int y = (dim.height-h)/2;
+
+        // Move the window
+        demo.setLocation(x, y);
         demo.setVisible(true);    
     }
     
