@@ -100,18 +100,19 @@ public class Hw2 extends JFrame
             public void actionPerformed(ActionEvent ae)
             {
 
-                //String content = readFile(file.toString());
-                String content = readFile("testFile.txt");
+                String content = readFile(file.toString());
+                //String content = readFile("testFile.txt");
                 String myPattern = "\\(\\d{3}\\) \\d{3}-\\d{4}";
                 Pattern p = Pattern.compile(myPattern);
                 Matcher m = p.matcher(content);
+				String phNumMatches = "";
 
                 int index = 0;
                 while(!m.hitEnd())
                 {
                     if (m.find(index)) 
                     {
-                        System.out.println(m.group());
+                        phNumMatches = phNumMatches + m.group()+ "\n";
                         index = m.end();
                     }
                 }
@@ -119,7 +120,7 @@ public class Hw2 extends JFrame
                 JInternalFrame findPhoneNumbersFrame = new JInternalFrame("Phone Numbers Found", 
                     true, true, true, true);
 
-                findPhoneNumbersPanel fnp = new findPhoneNumbersPanel();
+                findPhoneNumbersPanel fnp = new findPhoneNumbersPanel(phNumMatches);
                 findPhoneNumbersFrame.add(fnp);
 
                 findPhoneNumbersFrame.pack();
@@ -136,25 +137,26 @@ public class Hw2 extends JFrame
             public void actionPerformed(ActionEvent ae)
             {
 
-                //String content = readFile(file.toString());
-                String content = readFile("testFile.txt");
+                String content = readFile(file.toString());
+                //String content = readFile("testFile.txt");
                 String myPattern = "\\d{3}-\\d{2}-\\d{4}";
                 Pattern p = Pattern.compile(myPattern);
                 Matcher m = p.matcher(content);
+				String ssMatches = "";
 
                 int index = 0;
                 while(!m.hitEnd())
                 {
                     if (m.find(index)) 
                     {
-                        System.out.println(m.group());
+                        ssMatches = ssMatches + m.group()+ "\n";
                         index = m.end();
                     }
                 }
 
                 JInternalFrame socialSecurityNumbersFrame = new JInternalFrame("Social Security Numbers Found", true, true, true, true);
 
-                socialSecurityNumbersPanel ssnp = new socialSecurityNumbersPanel();
+                socialSecurityNumbersPanel ssnp = new socialSecurityNumbersPanel(ssMatches);
                 socialSecurityNumbersFrame.add(ssnp);
 
                 socialSecurityNumbersFrame.pack();
@@ -324,12 +326,13 @@ public class Hw2 extends JFrame
     {
         private JTextArea resultsField;
 
-        public findPhoneNumbersPanel()
+        public findPhoneNumbersPanel(String phNumMatches)
         {
             setLayout(new FlowLayout());
             
             resultsField = new JTextArea(25, 30);
             resultsField.setEditable(false);
+			resultsField.setText(phNumMatches);
 
             add (resultsField);
 
@@ -402,12 +405,13 @@ public class Hw2 extends JFrame
     {
         private JTextArea resultsField;
 
-        public socialSecurityNumbersPanel()
+        public socialSecurityNumbersPanel(String ssMatches)
         {
             setLayout(new FlowLayout());
             
             resultsField = new JTextArea(25, 30);
             resultsField.setEditable(false);
+			resultsField.setText(ssMatches);
 
             add (resultsField);
         }
