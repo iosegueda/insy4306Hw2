@@ -75,67 +75,7 @@ public class Hw2 extends JFrame //implements ActionListener
         {
             public void actionPerformed(ActionEvent ae)
             {
-                /*int wordCount = 0;
-                int lineCount = 0;
-                int charCount = 0;
-
-                String content = readFile(file.toString());
-
-                while ( line != null )
-                {
-                    // update the line count
-                    lineCount++;
-                    
-                    // split the line into words
-                    String[] words = line.split( "\\s" );
-                    
-                    wordCount += words.length;
-                    
-                    for( int i = 0; i < words.length; i++ )
-                        charCount += words[ i ].length();
-                }*/
-
-                /*String content = ""; 
-
-                try
-                {
-                    // open the file for reading
-                    BufferedReader reader = new BufferedReader( new FileReader( fileName ) );
-
-                    String line = reader.readLine();
-                    
-                    while ( line != null )
-                    {
-                        // update the line count
-                        lineCount++;
-                        
-                        // split the line into words
-                        String[] words = line.split( "\\s" );
-                        
-                        wordCount += words.length;
-                        
-                        for( int i = 0; i < words.length; i++ )
-                            charCount += words[ i ].length();
-                            
-                        line = reader.readLine();
-                }
-                    
-                    
-                reader.close();
-                    
-                System.out.println( "File: " + filename +
-                                    "\nNo. of lines: " + lineCount +
-                                    "\nNo. of words = " + wordCount +
-                                    "\nNo. of char = " + charCount );  
-                    }
-                catch ( IOException ioe )
-                {
-                    System.out.println( "Cannot Open File" );
-                }
-                catch ( Exception e )
-                {
-                    e.printStackTrace();
-                }*/ 
+                
                 fileStats(file);
 
                 JInternalFrame fileStatsFrame = new JInternalFrame("File Stats", true, true, true, true);
@@ -187,13 +127,27 @@ public class Hw2 extends JFrame //implements ActionListener
         
         JMenuItem socialSecurityNumbersMenuItem = new JMenuItem("Social Security Numbers");
         findNumbersMenuOption.add(socialSecurityNumbersMenuItem);
-        
-        
-        
+               
         JMenu aboutMenuOption = new JMenu("About");
         aboutMenuOption.setMnemonic('a');
         
         JMenuItem versionMenuOption = new JMenuItem("Version");
+        versionMenuOption.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                JInternalFrame versionMenuFrame = new JInternalFrame("Word Count", true, true, true, true);
+
+                versionMenuPanel vmp = new versionMenuPanel();
+                versionMenuFrame.add(vmp);
+
+                versionMenuFrame.pack();
+                desktop.add(versionMenuFrame);
+                versionMenuFrame.setVisible(true);
+
+            }
+        });
+        aboutMenuOption.add(versionMenuOption);
 
         menuBar.add(fileMenuOption);
         menuBar.add(findMenuOption);
@@ -408,5 +362,16 @@ public class Hw2 extends JFrame //implements ActionListener
         }
 
         return allCounts;
+    }
+
+    private class versionMenuPanel extends JPanel
+    {
+        public versionMenuPanel()
+        {
+            setLayout(new FlowLayout());
+            
+            JOptionPane.showMessageDialog( null, "\tVersion: 1.1\n\t Author: Iris Osegueda");
+        }
+        
     }
 }
