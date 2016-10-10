@@ -60,7 +60,7 @@ public class Hw2 extends JFrame
 
                 JInternalFrame wordCountFrame = new JInternalFrame("Word Count", true, true, true, true);
 
-                wordCountPanel wcp = new wordCountPanel();
+                wordCountPanel wcp = new wordCountPanel(file);
                 wordCountFrame.add(wcp);
 
                 wordCountFrame.pack();
@@ -243,18 +243,16 @@ public class Hw2 extends JFrame
         private JLabel findNowLabel;
         private JButton findNowButton;
         private JLabel resultsLabel;
-        private JTextArea resultsField;
-        //private JTextArea myArea;
+        private JTextField resultsField;
 
-        public wordCountPanel()
+        public wordCountPanel(File file)
         {
             setLayout(new GridLayout(4,1));
-
             findLabel = new JLabel("    Find: ");
-            findField = new JTextField(25);
+            findField = new JTextField(20);
             findNowButton = new JButton ("    Find Now");
-			resultsLabel = new JLabel("    # of times found: ");
-			resultsField = new JTextArea(3,8);
+			resultsLabel = new JLabel("    Number of times found: ");
+			resultsField = new JTextField(20);
 			resultsField.setEditable(false);
             
             findNowButton.addActionListener(new ActionListener()
@@ -263,7 +261,7 @@ public class Hw2 extends JFrame
                 {
 
                     String content = readFile(file.toString());
-                    //String content = readFile("testFile.txt");
+					
                     String myPattern = findField.getText();
 
                     Pattern p = Pattern.compile(myPattern);
