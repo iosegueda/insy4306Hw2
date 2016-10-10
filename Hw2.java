@@ -33,6 +33,7 @@ public class Hw2 extends JFrame //implements ActionListener
 		//catch ( Exception e ) {}
 		
 		//container = getContentPane();
+		desktop = new JDesktopPane();
 		menuBar = new JMenuBar();
 		file = new JMenu( "File" );
         file.setMnemonic( 'F' );
@@ -113,7 +114,7 @@ public class Hw2 extends JFrame //implements ActionListener
 		menuBar.add(about);
 		setJMenuBar(menuBar);
 		//desktop.add(wordCountFrame);
-		desktop = new JDesktopPane();
+		
 		
 		//container.add( desktop );
 		
