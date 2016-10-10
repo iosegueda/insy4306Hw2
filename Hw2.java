@@ -75,6 +75,69 @@ public class Hw2 extends JFrame //implements ActionListener
         {
             public void actionPerformed(ActionEvent ae)
             {
+                /*int wordCount = 0;
+                int lineCount = 0;
+                int charCount = 0;
+
+                String content = readFile(file.toString());
+
+                while ( line != null )
+                {
+                    // update the line count
+                    lineCount++;
+                    
+                    // split the line into words
+                    String[] words = line.split( "\\s" );
+                    
+                    wordCount += words.length;
+                    
+                    for( int i = 0; i < words.length; i++ )
+                        charCount += words[ i ].length();
+                }*/
+
+                /*String content = ""; 
+
+                try
+                {
+                    // open the file for reading
+                    BufferedReader reader = new BufferedReader( new FileReader( fileName ) );
+
+                    String line = reader.readLine();
+                    
+                    while ( line != null )
+                    {
+                        // update the line count
+                        lineCount++;
+                        
+                        // split the line into words
+                        String[] words = line.split( "\\s" );
+                        
+                        wordCount += words.length;
+                        
+                        for( int i = 0; i < words.length; i++ )
+                            charCount += words[ i ].length();
+                            
+                        line = reader.readLine();
+                }
+                    
+                    
+                reader.close();
+                    
+                System.out.println( "File: " + filename +
+                                    "\nNo. of lines: " + lineCount +
+                                    "\nNo. of words = " + wordCount +
+                                    "\nNo. of char = " + charCount );  
+                    }
+                catch ( IOException ioe )
+                {
+                    System.out.println( "Cannot Open File" );
+                }
+                catch ( Exception e )
+                {
+                    e.printStackTrace();
+                }*/ 
+                fileStats(file);
+
                 JInternalFrame fileStatsFrame = new JInternalFrame("File Stats", true, true, true, true);
 
                 fileStatsPanel fsp = new fileStatsPanel();
@@ -97,9 +160,9 @@ public class Hw2 extends JFrame //implements ActionListener
         {
             public void actionPerformed(ActionEvent ae)
             {
-                /*String content = readFile(file.toString());
+                String content = readFile(file.toString());
                 System.out.print(content);
-                //String myPattern = "(\\d\\d\\d)\\s\\d\\d\\d-\\d\\d\\d\\d";
+                /*//String myPattern = "(\\d\\d\\d)\\s\\d\\d\\d-\\d\\d\\d\\d";
                 String myPattern = "war";
                 Pattern p = Pattern.compile(myPattern);
                 Matcher m = p.matcher(content);
@@ -186,7 +249,7 @@ public class Hw2 extends JFrame //implements ActionListener
             while ( line != null )
             {
                 line = reader.readLine();
-                content = content + line; 
+                content = content + line + "\n"; 
             }
         }
         catch ( IOException ioe )
@@ -289,5 +352,52 @@ public class Hw2 extends JFrame //implements ActionListener
                 System.out.println(findField.getText());
             }
         }*/
+    }
+
+    public void fileStats(File file)
+    {
+        int wordCount = 0, lineCount = 0, charCount = 0;
+        
+        try
+        {
+            // open the file for reading
+            BufferedReader reader = new BufferedReader( new FileReader( file ) );
+                
+            // read the first line
+            String line = reader.readLine();
+            
+            while ( line != null )
+            {
+                // update the line count
+                lineCount++;
+                
+                // split the line into words
+                String[] words = line.split( "\\s" );
+                
+                wordCount += words.length;
+                
+                for( int i = 0; i < words.length; i++ )
+                    charCount += words[ i ].length();
+                    
+                line = reader.readLine();
+            }
+            
+            
+            reader.close();
+            
+            System.out.println( "\nNo. of lines: " + lineCount +
+                                "\nNo. of words = " + wordCount +
+                                "\nNo. of char = " + charCount );   
+            
+            System.exit( 0 );
+        }
+        catch ( IOException ioe )
+        {
+            System.out.println( "Cannot Open File" );
+        }
+        catch ( Exception e )
+        {
+            e.printStackTrace();
+        }
     }
 }
