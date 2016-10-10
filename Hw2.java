@@ -97,18 +97,27 @@ public class Hw2 extends JFrame
         {
             public void actionPerformed(ActionEvent ae)
             {
-                String content = readFile(file.toString());
-                System.out.print(content);
-                /*//String myPattern = "(\\d\\d\\d)\\s\\d\\d\\d-\\d\\d\\d\\d";
-                String myPattern = "war";
+
+                //String content = readFile(file.toString());
+                String content = readFile("testFile.txt");
+                //System.out.print(content);
+                String myPattern = "(\\d\\d\\d)\\s\\d\\d\\d-\\d\\d\\d\\d";
+                //myPattern = "wa\\d";
                 Pattern p = Pattern.compile(myPattern);
+                //content = "war";
                 Matcher m = p.matcher(content);
 
-                if (m.find()) 
+                int index = 0;
+                while(!m.hitEnd())
                 {
-                    System.out.println(m.group(1));
+                    if (m.find(index)) 
+                    {
+                        //System.out.println(m.Pattern());
+                        System.out.println(m.group());
+                        index = m.end();
+                    }
                 }
-                */
+
                 JInternalFrame findPhoneNumbersFrame = new JInternalFrame("Phone Numbers Found", 
                     true, true, true, true);
 
