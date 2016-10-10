@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.*;
 import java.util.regex.*;
 
-public class Hw2 extends JFrame //implements ActionListener
+public class Hw2 extends JFrame
 {
     private JDesktopPane desktop;  
     File file = null;
@@ -75,7 +75,6 @@ public class Hw2 extends JFrame //implements ActionListener
         {
             public void actionPerformed(ActionEvent ae)
             {
-                
                 fileStats(file);
 
                 JInternalFrame fileStatsFrame = new JInternalFrame("File Stats", true, true, true, true);
@@ -86,14 +85,12 @@ public class Hw2 extends JFrame //implements ActionListener
                 fileStatsFrame.pack();
                 desktop.add(fileStatsFrame);
                 fileStatsFrame.setVisible(true);
-
             }
         });
 
         JMenu findNumbersMenuOption = new JMenu("Find Numbers");
         findMenuOption.add(findNumbersMenuOption);
-        
-        
+                
         JMenuItem phoneNumbersMenuItem = new JMenuItem("Phone Numbers");
         findNumbersMenuOption.add(phoneNumbersMenuItem);
         phoneNumbersMenuItem.addActionListener(new ActionListener()
@@ -127,24 +124,30 @@ public class Hw2 extends JFrame //implements ActionListener
         
         JMenuItem socialSecurityNumbersMenuItem = new JMenuItem("Social Security Numbers");
         findNumbersMenuOption.add(socialSecurityNumbersMenuItem);
+        socialSecurityNumbersMenuItem.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent ae)
+            {
+                JInternalFrame socialSecurityNumbersFrame = new JInternalFrame("Social Security Numbers Found", true, true, true, true);
+
+                socialSecurityNumbersPanel ssnp = new socialSecurityNumbersPanel();
+                socialSecurityNumbersFrame.add(ssnp);
+
+                socialSecurityNumbersFrame.pack();
+                desktop.add(socialSecurityNumbersFrame);
+                socialSecurityNumbersFrame.setVisible(true);
+
+            }
+        });
                
         JMenu aboutMenuOption = new JMenu("About");
         aboutMenuOption.setMnemonic('a');
-        
         JMenuItem versionMenuOption = new JMenuItem("Version");
         versionMenuOption.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent ae)
             {
-                JInternalFrame versionMenuFrame = new JInternalFrame("Word Count", true, true, true, true);
-
                 versionMenuPanel vmp = new versionMenuPanel();
-                versionMenuFrame.add(vmp);
-
-                versionMenuFrame.pack();
-                desktop.add(versionMenuFrame);
-                versionMenuFrame.setVisible(true);
-
             }
         });
         aboutMenuOption.add(versionMenuOption);
@@ -154,10 +157,7 @@ public class Hw2 extends JFrame //implements ActionListener
         menuBar.add(aboutMenuOption);
         setJMenuBar(menuBar);
         
-        
-        add( desktop );
-        
-        
+		add( desktop );   
     }
     
     public static void main (String args[])
@@ -166,26 +166,25 @@ public class Hw2 extends JFrame //implements ActionListener
         demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         demo.setLocationRelativeTo(null);
         demo.setSize(1000,500); 
-        demo.setVisible(true);
-        
+        demo.setVisible(true);    
     }
     
     public File chooseFile()
     {
-        JFileChooser fileChooser = new JFileChooser();//create filechooser
+        JFileChooser fileChooser = new JFileChooser();
                     
         fileChooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
         
         int result= fileChooser.showOpenDialog(this);
-        //popup as a dialog on this JFRAme
         
         if(result == JFileChooser.CANCEL_OPTION)
-            System.exit(0);//if cancel exit
-        
-        File file = fileChooser.getSelectedFile();//else if select a file open that file
+        {
+			System.exit(0);
+		}    
+		
+        File file = fileChooser.getSelectedFile();
         System.out.println(file);
-        return file;
-                        
+        return file;  
     }
 
     public String readFile(String fileName)
@@ -194,7 +193,6 @@ public class Hw2 extends JFrame //implements ActionListener
 
         try
         {
-            // open the file for reading
             BufferedReader reader = new BufferedReader( new FileReader( fileName ) );
 
             String line = reader.readLine();
@@ -242,9 +240,7 @@ public class Hw2 extends JFrame //implements ActionListener
             findNowButton.addActionListener(myHandeler);
 
             add(findLabel);
-            //add(nameField);
             add(myArea);
-            //add(findNowLabel);
             add(findNowButton);
         }
         class Handeler implements ActionListener
@@ -267,19 +263,9 @@ public class Hw2 extends JFrame //implements ActionListener
             resultsField = new JTextArea(25, 30);
             resultsField.setEditable(false);
 
-            //Handeler myHandeler = new Handeler();
-            //findNowButton.addActionListener(myHandeler);
-
             add (resultsField);
 
         }
-        /*class Handeler implements ActionListener
-        {
-            public void actionPerformed(ActionEvent ae)
-            {
-                System.out.println(findField.getText());
-            }
-        }*/
     }
 
     private class findPhoneNumbersPanel extends JPanel
@@ -293,19 +279,9 @@ public class Hw2 extends JFrame //implements ActionListener
             resultsField = new JTextArea(25, 30);
             resultsField.setEditable(false);
 
-            //Handeler myHandeler = new Handeler();
-            //findNowButton.addActionListener(myHandeler);
-
             add (resultsField);
 
         }
-        /*class Handeler implements ActionListener
-        {
-            public void actionPerformed(ActionEvent ae)
-            {
-                System.out.println(findField.getText());
-            }
-        }*/
     }
 
     public String fileStats(File file)
@@ -317,18 +293,14 @@ public class Hw2 extends JFrame //implements ActionListener
         
         try
         {
-            // open the file for reading
             BufferedReader reader = new BufferedReader( new FileReader( file ) );
                 
-            // read the first line
             String line = reader.readLine();
             
             while ( line != null )
             {
-                // update the line count
                 lineCount++;
                 
-                // split the line into words
                 String[] words = line.split( "\\s" );
                 
                 wordCount += words.length;
@@ -373,5 +345,20 @@ public class Hw2 extends JFrame //implements ActionListener
             JOptionPane.showMessageDialog( null, "\tVersion: 1.1\n\t Author: Iris Osegueda");
         }
         
+    }
+    private class socialSecurityNumbersPanel extends JPanel
+    {
+        private JTextArea resultsField;
+
+        public socialSecurityNumbersPanel()
+        {
+            setLayout(new FlowLayout());
+            
+            resultsField = new JTextArea(25, 30);
+            resultsField.setEditable(false);
+
+            add (resultsField);
+        }
+      
     }
 }
