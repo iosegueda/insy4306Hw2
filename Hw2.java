@@ -102,11 +102,8 @@ public class Hw2 extends JFrame
 
                 //String content = readFile(file.toString());
                 String content = readFile("testFile.txt");
-                //System.out.print(content);
-                String myPattern = "(\\d\\d\\d)\\s\\d\\d\\d-\\d\\d\\d\\d";
-                //myPattern = "wa\\d";
+                String myPattern = "\\(\\d{3}\\) \\d{3}-\\d{4}";
                 Pattern p = Pattern.compile(myPattern);
-                //content = "war";
                 Matcher m = p.matcher(content);
 
                 int index = 0;
@@ -114,7 +111,6 @@ public class Hw2 extends JFrame
                 {
                     if (m.find(index)) 
                     {
-                        //System.out.println(m.Pattern());
                         System.out.println(m.group());
                         index = m.end();
                     }
