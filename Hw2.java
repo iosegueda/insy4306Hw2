@@ -233,20 +233,25 @@ public class Hw2 extends JFrame
         private JLabel findNowLabel;
         private JButton findNowButton;
         private JLabel resultsLabel;
-        private JTextField resultsField;
+        private JTextArea resultsField;
         //private JTextArea myArea;
 
         public wordCountPanel()
         {
-            setLayout(new FlowLayout());
+            setLayout(new GridLayout(2,2));
 
             findLabel = new JLabel("    Find: ");
-            findField = new JTextField(30);
+            findField = new JTextField(25);
             findNowButton = new JButton ("    Find Now");
+			resultsLabel = new JLabel("    # of times found: ");
+			resultsField = new JTextArea(10,8);
+			resultsField.setEditable(false);
 
-            add(findLabel);
+            //add(findLabel);
 			add(findField);
             add(findNowButton);
+			add(resultsLabel);
+			add(resultsField);
         }
     }
     
