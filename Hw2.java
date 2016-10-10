@@ -354,9 +354,12 @@ public class Hw2 extends JFrame //implements ActionListener
         }*/
     }
 
-    public void fileStats(File file)
+    public String fileStats(File file)
     {
-        int wordCount = 0, lineCount = 0, charCount = 0;
+        int wordCount = 0; 
+        int lineCount = 0; 
+        int charCount = 0;
+        String allCounts = "";
         
         try
         {
@@ -385,11 +388,15 @@ public class Hw2 extends JFrame //implements ActionListener
             
             reader.close();
             
-            System.out.println( "\nNo. of lines: " + lineCount +
+            /*System.out.println( "\nNo. of lines: " + lineCount +
                                 "\nNo. of words = " + wordCount +
-                                "\nNo. of char = " + charCount );   
+                                "\nNo. of char = " + charCount );   */
             
-            System.exit( 0 );
+            allCounts = ( "\nNo. of lines: " + lineCount +
+                            "\nNo. of words = " + wordCount +
+                            "\nNo. of char = " + charCount );
+
+            System.out.println(allCounts);
         }
         catch ( IOException ioe )
         {
@@ -399,5 +406,7 @@ public class Hw2 extends JFrame //implements ActionListener
         {
             e.printStackTrace();
         }
+
+        return allCounts;
     }
 }
