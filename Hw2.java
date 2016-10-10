@@ -248,13 +248,13 @@ public class Hw2 extends JFrame
 
         public wordCountPanel()
         {
-            setLayout(new GridLayout(2,2));
+            setLayout(new GridLayout(4,1));
 
             findLabel = new JLabel("    Find: ");
             findField = new JTextField(25);
             findNowButton = new JButton ("    Find Now");
 			resultsLabel = new JLabel("    # of times found: ");
-			resultsField = new JTextArea(10,8);
+			resultsField = new JTextArea(3,8);
 			resultsField.setEditable(false);
             
             findNowButton.addActionListener(new ActionListener()
@@ -280,8 +280,7 @@ public class Hw2 extends JFrame
                         }
                     }
 
-
-                    System.out.println(count);
+                    resultsField.setText(Integer.toString(count));
                 }
             });
 
