@@ -52,6 +52,18 @@ public class Validate extends JFrame
 			}
 		});
 		loginButton = new JButton("\tLogin");
+		loginButton.addActionListener(new ActionListener()
+		{
+			//validateDomain(domainField.getText());
+			//validateIP();
+			//validateUsername();
+			//validatePassword();
+			public void actionPerformed(ActionEvent ae)
+			{
+				if( validateDomain(domainField.getText()) )
+					System.out.println("it works!");
+			}
+		});
 		
 		add(domainLabel);
 		add(domainField);
@@ -82,4 +94,17 @@ public class Validate extends JFrame
         demo.setLocation(x, y);
         demo.setVisible(true);  
 	}
+	
+	public boolean validateDomain(String domainEntry )
+	{
+		
+		String domainPattern = "[a-z]{3}\\\\[A-Z]{4}\\.[a-z]{3}\\.edu";
+		
+		Pattern p = Pattern.compile(domainPattern);
+		Matcher m = p.matcher(domainEntry);
+		
+		return m.matches();
+		
+	}
+	
 } 
