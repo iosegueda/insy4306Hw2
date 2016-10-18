@@ -60,8 +60,12 @@ public class Validate extends JFrame
 			//validatePassword();
 			public void actionPerformed(ActionEvent ae)
 			{
-				if( validateDomain(domainField.getText()) )
+				//if( validateDomain(domainField.getText()) )
+				//	;
+				validateField(domainField.getText(), "[a-z]{3}\\\\[A-Z]{4}\\.[a-z]{3}\\.edu");
+				if (validateField(ipField.getText(), "\\d{3}\\.\\d{2}\\.\\d{2}\\.\\d{2}"))
 					System.out.println("it works!");
+			
 			}
 		});
 		
@@ -95,7 +99,7 @@ public class Validate extends JFrame
         demo.setVisible(true);  
 	}
 	
-	public boolean validateDomain(String domainEntry )
+	/*public boolean validateDomain(String domainEntry )
 	{
 		
 		String domainPattern = "[a-z]{3}\\\\[A-Z]{4}\\.[a-z]{3}\\.edu";
@@ -105,6 +109,14 @@ public class Validate extends JFrame
 		
 		return m.matches();
 		
+	}*/
+	
+	public boolean validateField(String domainEntry, String regexPattern)
+	{
+		Pattern p = Pattern.compile(regexPattern);
+		Matcher m = p.matcher(domainEntry);
+		
+		return m.matches();
 	}
 	
 } 
