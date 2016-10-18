@@ -44,6 +44,13 @@ public class Validate extends JFrame
 		passwordField = new JTextField(20);
 		
 		cancelButton = new JButton("\tCancel");
+		cancelButton.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent ae)
+			{
+				System.exit(0);
+			}
+		});
 		loginButton = new JButton("\tLogin");
 		
 		add(domainLabel);
