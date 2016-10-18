@@ -6,12 +6,12 @@ import java.io.*;
 import java.util.*;
 import java.util.regex.*;
 
-public class Hw2 extends JFrame
+public class Manipulation extends JFrame
 {
     private JDesktopPane desktop;  
     File file = null;
 
-    public Hw2()
+    public Manipulation()
     {
         super( "GUI App" );
         try
@@ -184,24 +184,6 @@ public class Hw2 extends JFrame
         setJMenuBar(menuBar);
         
 		add( desktop );   
-    }
-    
-    public static void main (String args[])
-    {
-        Hw2 demo= new Hw2();
-        demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        demo.setLocationRelativeTo(null);
-        demo.setSize(1000,500); 
-        
-        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        int w = demo.getSize().width;
-        int h = demo.getSize().height;
-        int x = (dim.width-w)/2;
-        int y = (dim.height-h)/2;
-
-        // Move the window
-        demo.setLocation(x, y);
-        demo.setVisible(true);    
     }
     
     public File chooseFile()
@@ -397,7 +379,7 @@ public class Hw2 extends JFrame
         {
             setLayout(new FlowLayout());
             
-            JOptionPane.showMessageDialog( null, "\tVersion: 1.1\n\t Author: Iris Osegueda");
+            JOptionPane.showMessageDialog( null, "\tVersion: 1.1\n\tDate: 10/03/2016\n\tAuthor: Iris Osegueda");
         }
         
     }
@@ -416,5 +398,23 @@ public class Hw2 extends JFrame
             add (resultsField);
         }
       
+    }
+	
+	public static void main (String args[])
+    {
+        Manipulation demo= new Manipulation();
+        demo.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        demo.setLocationRelativeTo(null);
+        demo.setSize(1000,500); 
+        
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        int w = demo.getSize().width;
+        int h = demo.getSize().height;
+        int x = (dim.width-w)/2;
+        int y = (dim.height-h)/2;
+
+        // Move the window
+        demo.setLocation(x, y);
+        demo.setVisible(true);    
     }
 }
