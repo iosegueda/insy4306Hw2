@@ -60,9 +60,9 @@ public class Validate extends JFrame
 				String failedValidation = "";
 				
 				String domainPattern = "[a-z]{3}\\\\[A-Z]{4}\\.[a-z]{3}\\.edu";
-				String ipPattern = "\\d{3}\\.\\d{2}\\.\\d{2}\\.\\d{2}";
+				String ipPattern = "\\d{3}\\.\\d{3}\\.\\d{2}\\.\\d{2}";
 				String usernamePattern = 
-					"[a-z|A-Z]\\w*@[a-z|A-Z]\\w*\\.[C|c|O|o|e|E][o|O|r|R|d|D][m|M|g|G|u|U]";
+					"[a-z|A-Z]\\w*@[a-z|A-Z]\\w*\\.(com|COM|edu|EDU|ORG|org)";
 				String passwordPattern = 
 					"((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W])\\S{8,})";
 				
@@ -76,21 +76,25 @@ public class Validate extends JFrame
 				{
 					failedValidation += "Please fix your domain field\n";
 					domainField.setText("");
+					domainField.requestFocusInWindow();
 				}
 				if(!ipIsValidated)
 				{
-					failedValidation += "Please fix your IP Address field\n";
+					failedValidation += "Please fix your IP address field\n";
 					ipField.setText("");
+					ipField.requestFocusInWindow();
 				}
 				if(!usernameIsValidated)
 				{
-					failedValidation += "Please fix your Username field\n";
+					failedValidation += "Please fix your username field\n";
 					usernameField.setText("");
+					usernameField.requestFocusInWindow();
 				}
 				if(!passwordIsValidated)
 				{
-					failedValidation += "Please fix your Password field\n";
+					failedValidation += "Please fix your password field\n";
 					passwordField.setText("");
+					passwordField.requestFocusInWindow();
 				}
 				
 				
