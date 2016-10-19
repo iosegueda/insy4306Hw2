@@ -61,11 +61,12 @@ public class Validate extends JFrame
 			public void actionPerformed(ActionEvent ae)
 			{
 				//if( validateDomain(domainField.getText()) )
-				//	;
+				//	System.out.println("it works!");
 				validateField(domainField.getText(), "[a-z]{3}\\\\[A-Z]{4}\\.[a-z]{3}\\.edu");
-				if (validateField(ipField.getText(), "\\d{3}\\.\\d{2}\\.\\d{2}\\.\\d{2}"))
-					System.out.println("it works!");
-			
+				validateField(ipField.getText(), "\\d{3}\\.\\d{2}\\.\\d{2}\\.\\d{2}");
+				validateField(usernameField.getText(), 
+					"[a-z|A-Z]\\w*@[a-z|A-Z]\\w*\\.[C|c|O|o|e|E][o|O|r|R|d|D][m|M|g|G|u|U]");
+				
 			}
 		});
 		
