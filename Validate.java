@@ -27,7 +27,7 @@ public class Validate extends JFrame
 	
 	public Validate()
 	{
-		super( "GUI App" );
+		super( "Login Form" );
         
 		setLayout(new GridLayout(5,2));
 		
@@ -54,18 +54,55 @@ public class Validate extends JFrame
 		loginButton = new JButton("\tLogin");
 		loginButton.addActionListener(new ActionListener()
 		{
-			//validateDomain(domainField.getText());
-			//validateIP();
-			//validateUsername();
-			//validatePassword();
+
 			public void actionPerformed(ActionEvent ae)
 			{
-				//if( validateDomain(domainField.getText()) )
-				//	System.out.println("it works!");
-				validateField(domainField.getText(), "[a-z]{3}\\\\[A-Z]{4}\\.[a-z]{3}\\.edu");
-				validateField(ipField.getText(), "\\d{3}\\.\\d{2}\\.\\d{2}\\.\\d{2}");
-				validateField(usernameField.getText(), 
-					"[a-z|A-Z]\\w*@[a-z|A-Z]\\w*\\.[C|c|O|o|e|E][o|O|r|R|d|D][m|M|g|G|u|U]");
+				String failedValidation = "";
+				
+				String domainPattern = "[a-z]{3}\\\\[A-Z]{4}\\.[a-z]{3}\\.edu";
+				String ipPattern = "\\d{3}\\.\\d{2}\\.\\d{2}\\.\\d{2}";
+				String usernamePattern = 
+					"[a-z|A-Z]\\w*@[a-z|A-Z]\\w*\\.[C|c|O|o|e|E][o|O|r|R|d|D][m|M|g|G|u|U]";
+				String passwordPattern = 
+					"((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\\W])\\S{8,})";
+				
+
+				boolean domainIsValidated = validateField(domainField.getText(), domainPattern);
+				boolean ipIsValidated = validateField(ipField.getText(), ipPattern);
+				boolean usernameIsValidated = validateField(usernameField.getText(), usernamePattern);
+				boolean passwordIsValidated = validateField(passwordField.getText(), passwordPattern);
+				
+				if (!domainIsValidated)
+				{
+					failedValidation += "Please fix your domain field\n";
+					domainField.setText("");
+				}
+				if(!ipIsValidated)
+				{
+					failedValidation += "Please fix your IP Address field\n";
+					ipField.setText("");
+				}
+				if(!usernameIsValidated)
+				{
+					failedValidation += "Please fix your Username field\n";
+					usernameField.setText("");
+				}
+				if(!passwordIsValidated)
+				{
+					failedValidation += "Please fix your Password field\n";
+					passwordField.setText("");
+				}
+				
+				
+				if (domainIsValidated && ipIsValidated && usernameIsValidated && passwordIsValidated)
+				{
+					JOptionPane.showMessageDialog( null, "\tYou are logged in!");
+				}
+				else 
+				{
+					JOptionPane.showMessageDialog( null, failedValidation);
+				}
+				
 				
 			}
 		});
@@ -95,22 +132,10 @@ public class Validate extends JFrame
         int x = (dim.width-w)/2;
         int y = (dim.height-h)/2;
 
-        // Move the window
+
         demo.setLocation(x, y);
         demo.setVisible(true);  
 	}
-	
-	/*public boolean validateDomain(String domainEntry )
-	{
-		
-		String domainPattern = "[a-z]{3}\\\\[A-Z]{4}\\.[a-z]{3}\\.edu";
-		
-		Pattern p = Pattern.compile(domainPattern);
-		Matcher m = p.matcher(domainEntry);
-		
-		return m.matches();
-		
-	}*/
 	
 	public boolean validateField(String domainEntry, String regexPattern)
 	{
